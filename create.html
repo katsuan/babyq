@@ -26,7 +26,7 @@
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
 <!-- Q キット（おくるんの共通部品）。色と字は下の :root で、ジェンダーリビールの色に -->
 <link rel="stylesheet" href="https://katsuan.github.io/line-share/shared/ui.css?v=202610261000">
-<script src="https://katsuan.github.io/line-share/shared/ui.js?v=202610291806" defer></script>
+<script src="https://katsuan.github.io/line-share/shared/ui.js?v=202611012034" defer></script>
 <style>
   :root {
     --boy: #5aa9e6;
@@ -244,7 +244,7 @@
   <!-- 作ったあと：送る操作を先頭に、答えが見えてしまう「開いてみる」は最後に置く -->
   <section class="ls-panel out" id="out">
     <p class="ls-panel-title">🎉 できました！ カードで送りましょう</p>
-    <a class="ls-button is-block line is-oqrn" id="lineFlex" target="_blank" rel="noopener">カードで送る（おすすめ）</a>
+    <a class="ls-button is-block line is-oqrn" id="lineFlex" target="_blank" rel="noopener">カードでおくるん（おすすめ）</a>
     <p class="note" id="lenWarn" style="display:none;color:var(--girl-deep)">メッセージを短くしてね（いまはリンクが長く、カードのボタンに入らないかもしれません）。</p>
 
     <div class="out-block">
@@ -271,7 +271,7 @@
 <!-- おくるんのカードの入口（LIFF ID とカードの URL は line-share の shared/oqrn.js に1か所） -->
 <script src="https://katsuan.github.io/line-share/shared/oqrn.js"></script>
 <script src="https://katsuan.github.io/line-share/shared/tool-share.js" data-tool="babyq" defer></script>
-<script src="create.js?v=202610291806"></script>
+<script src="create.js?v=202611012034"></script>
 <!-- 電波がなくても開けるように（sw.js） -->
 <script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js").catch(() => {});</script>
 </body>
