@@ -696,11 +696,14 @@
     sheet.querySelector("img").src = url;
     const actions = sheet.querySelector(".snap-actions");
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      const share = Object.assign(document.createElement("button"), { type: "button", className: "pill primary", textContent: "📤 共有・保存" });
+      const share = Object.assign(document.createElement("button"), { type: "button", className: "pill primary" });
+      share.innerHTML = `<span class="ls-icon" data-icon="share" aria-hidden="true"></span>共有・保存`; // qcheck-ok: W1 決まった言葉だけ
       share.onclick = () => navigator.share({ files: [file] }).catch(() => {});
       actions.append(share);
     }
-    actions.append(Object.assign(document.createElement("a"), { className: "pill", href: url, download: file.name, textContent: "⬇️ ダウンロード" }));
+    const download = Object.assign(document.createElement("a"), { className: "pill", href: url, download: file.name });
+    download.innerHTML = `<span class="ls-icon" data-icon="save" aria-hidden="true"></span>ダウンロード`; // qcheck-ok: W1 決まった言葉だけ
+    actions.append(download);
     // 画像の窓を閉じて、画像の URL を片づける
     const close = () => { sheet.remove(); URL.revokeObjectURL(url); };
     sheet.querySelector(".snap-card > button").onclick = close;

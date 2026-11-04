@@ -250,18 +250,18 @@
     ].filter(Boolean).join("\n");
   }
   // 例文は画面に全文出しているので、そのままコピー
-  $("exampleCopy").onclick = () => LineShareUI.copy($("exampleText").textContent, { done: "📋 例文をコピーしました" });
+  $("exampleCopy").onclick = () => LineShareUI.copy($("exampleText").textContent, { done: "例文をコピーしました" });
 
   // はじめての人にだけ、使い方を3つ（Q キットの ui.js は defer なので、読み終わってから）
   document.addEventListener("DOMContentLoaded", () => {
     LineShareUI.firstTip(
       "babyq",
-      ["性別を選んで「🎁 発表ページを作る」を押します", "合言葉を入れると、知っている人だけが答えを見られます", "「カードでおくるん」で家族や友だちへ。プレゼントを開けるまで性別はヒミツ"],
+      ["性別を選んで「発表ページを作る」を押します", "合言葉を入れると、知っている人だけが答えを見られます", "「カードでおくるん」で家族や友だちへ。プレゼントを開けるまで性別はヒミツ"],
       form
     );
   });
 
   // ボタン名どおりリンクだけをコピー(見えない文を混ぜない)
   // 季節の絵文字をときどき（Q キットの season.js。読めていなければ付けない）
-  $("copy").onclick = () => LineShareUI.copy($("url").textContent, { done: window.QSeason ? QSeason.decorate("🔗 リンクをコピーしました") : "🔗 リンクをコピーしました" });
+  $("copy").onclick = () => LineShareUI.copy($("url").textContent, { done: window.QSeason ? QSeason.decorate("リンクをコピーしました") : "リンクをコピーしました" });
 })();

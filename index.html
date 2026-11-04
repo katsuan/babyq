@@ -333,6 +333,8 @@
     background: #fff; color: var(--reveal-deep); box-shadow: 0 4px 12px rgba(0,0,0,.1);
   }
   .pill.primary { background: var(--reveal); color: #fff; }
+  /* ボタンの前の線アイコン（Q キットの .ls-icon）と字の間 */
+  .pill .ls-icon, .sound-toggle .ls-icon, summary .ls-icon { margin-right: 4px; }
   .share-box { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 14px; animation: lateIn 1.2s ease both 4s; }
   .pill.suqsuq-btn { display: inline-block; margin: 4px auto 0; background: #fff4ef; color: #c4583f; text-decoration: none; }
   .pill.suqsuq-btn[hidden] { display: none; }
@@ -404,7 +406,7 @@
     <ol class="steps" id="steps"></ol>
     <button class="cta" id="startBtn">🎁 押して発表を見る</button>
     <div class="lock-note" id="lockNote"></div>
-    <label class="sound-toggle"><input type="checkbox" id="soundOn" checked> 🔊 音を出す</label>
+    <label class="sound-toggle"><input type="checkbox" id="soundOn" checked> <span class="ls-icon" data-icon="volume-2" aria-hidden="true"></span>音を出す</label>
   </section>
 
   <!-- 予定日までのカウントとカレンダーは1枚のカードにまとめる -->
@@ -457,18 +459,18 @@
       <a class="pill line-btn is-oqrn" id="lineFlexBtn" target="_blank" rel="noopener">カードで家族にも送る</a>
       <p class="share-note">性別は書かずに、このページだけを送ります。<br>受け取った人も、プレゼントを開けて楽しめます🎁</p>
       <details class="example">
-        <summary>✉️ 自分で送るときの例文</summary>
+        <summary><span class="ls-icon" data-icon="send" aria-hidden="true"></span>自分で送るときの例文</summary>
         <p class="example-text" id="exampleText"></p>
         <button class="pill" id="exampleCopy" type="button">この例文をコピー</button>
       </details>
     </div>
     <!-- すくすく（SuQSuQ）へ：出産予定日と名前を入れて「妊娠◯週」を写真に（予定日がまだ先のときだけ） -->
-    <a class="pill suqsuq-btn" id="suqsuqBtn" target="_blank" rel="noopener" hidden>🌱 すくすくで「妊娠◯週」を写真に</a>
+    <a class="pill suqsuq-btn" id="suqsuqBtn" target="_blank" rel="noopener" hidden><span class="ls-icon" data-icon="sprout" aria-hidden="true"></span>すくすくで「妊娠◯週」を写真に</a>
     <div class="actions">
-      <button class="pill" id="againBtn">🔁 もう一度見る</button>
+      <button class="pill" id="againBtn"><span class="ls-icon" data-icon="undo" aria-hidden="true"></span>もう一度見る</button>
       <button class="pill" id="replayBtn">最初の画面へ</button>
       <button class="pill" id="shareBtn">リンクをコピー</button>
-      <button class="pill" id="snapBtn">📷 画像で保存</button>
+      <button class="pill" id="snapBtn"><span class="ls-icon" data-icon="camera" aria-hidden="true"></span>画像で保存</button>
     </div>
     </div></div>
   </div>
