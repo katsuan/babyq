@@ -82,6 +82,8 @@ index.html?gender=girl&due=2027-02-14&dad=太郎&mom=花子&name=べびちゃん
 | `create.html`・`create.js` | 作るページと、その入口（答えを暗号にしてリンクを作る） |
 | `js/link.js` | 受けとったリンクの中身を読む（決まった形・長さにそろえる）・すくすくへのリンク |
 | `js/calendar.js` | 発表のページのカレンダーのマスと曜日の並び |
+| `js/sound.js` | 発表の音（タップ・心音・ファンファーレ。Web Audio で作る） |
+| `js/confetti.js` | 発表の紙ふぶき（キャンバス） |
 | `manifest.webmanifest`・`sw.js` | ホーム画面に置くときの設定と、電波がないときに開く仕組み |
-| `params.js`・`calendar.js` | 前の名前のファイル。前の index.html を覚えているブラウザのために、新しいファイルを読むだけ。2026-11-25 ごろ消す |
-| `test/` | `node --test test/`（リンクを読む・作る、カレンダー、読みこみの印 `?v=` のそろい） |
+| `params.js`・`calendar.js` | 前の名前のファイル。前の index.html を覚えているブラウザのために、新しいファイルを読むだけ（calendar.js は js/sound.js・js/confetti.js も）。2026-11-25 ごろ消す |
+| `test/` | `node --test test/`（リンクを読む・作る、カレンダー、発表の音、ファイルを読む順番、読みこみの印 `?v=` のそろい） |

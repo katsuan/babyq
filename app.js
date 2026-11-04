@@ -301,97 +301,13 @@
     }
   })();
 
-  /* ============ サウンド(Web Audio 合成) ============ */
-  let ac = null;
+  /* ============ サウンド・紙吹雪（js/sound.js・js/confetti.js） ============ */
   // 音を出す設定か
   const soundOn = () => $("soundOn").checked;
-  // 音の準備（AudioContext）
-  function audio() { if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)(); return ac; }
-  // 音を1つ鳴らす（高さ・長さ・音色・大きさ・鳴りはじめ）
-  function tone(freq, dur = .15, type = "sine", vol = .2, when = 0) {
-    if (!soundOn()) return;
-    const c = audio(), t = c.currentTime + when;
-    const o = c.createOscillator(), g = c.createGain();
-    o.type = type; o.frequency.setValueAtTime(freq, t);
-    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + dur);
-    o.connect(g).connect(c.destination); o.start(t); o.stop(t + dur);
-  }
-  // 心音「ドクン、ドクン」: 低いサイン波の2連打を1秒周期で
-  function heartbeat(beats) {
-    if (!soundOn()) return;
-    const c = audio();
-    for (let i = 0; i < beats; i++) {
-      [0, 0.18].forEach((off, k) => {
-        const t = c.currentTime + i * 1.0 + off;
-        const o = c.createOscillator(), g = c.createGain();
-        o.type = "sine";
-        o.frequency.setValueAtTime(k ? 70 : 85, t);
-        o.frequency.exponentialRampToValueAtTime(40, t + 0.15);
-        g.gain.setValueAtTime(0.0001, t);
-        g.gain.exponentialRampToValueAtTime(k ? 0.35 : 0.5, t + 0.02);
-        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.2);
-        o.connect(g).connect(c.destination); o.start(t); o.stop(t + 0.22);
-      });
-    }
-  }
-  // 発表のときのファンファーレ
-  function fanfare() {
-    [523, 659, 784, 1047].forEach((f, i) => tone(f, .35, "triangle", .22, i * .12));
-    [784, 1047, 1319].forEach(f => tone(f, 1.2, "triangle", .12, .55));
-  }
-
-  /* ============ 紙吹雪 ============ */
-  const cv = $("confetti"), ctx = cv.getContext("2d");
-  let parts = [], raf = null;
-  // キャンバスは実際の表示サイズ(clientWidth/Height)に合わせる。スマホでツールバーが出入りすると
-  // innerHeight だけ変わって resize が来ないことがあるので、visualViewport の変化でも合わせ直す
-  function resize() {
-    cv.width = cv.clientWidth * devicePixelRatio; cv.height = cv.clientHeight * devicePixelRatio;
-    ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
-  }
-  addEventListener("resize", resize); window.visualViewport?.addEventListener("resize", resize); resize();
-  // 画面の高さではなくキャンバス全体を消す(一部だけ消し残して紙吹雪が帯状に残るのを防ぐ)
-  function clearAll() { ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, cv.width, cv.height); ctx.restore(); }
-  // 紙ふぶきを1回はじけさせる
-  function burst(colors, count = 180, origin = { x: innerWidth / 2, y: innerHeight * .45 }) {
-    for (let i = 0; i < count; i++) {
-      const a = Math.random() * Math.PI * 2, sp = 4 + Math.random() * 9;
-      parts.push({
-        x: origin.x, y: origin.y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 6,
-        w: 6 + Math.random() * 6, h: 8 + Math.random() * 10, r: Math.random() * 6, vr: (Math.random() - .5) * .3,
-        c: colors[i % colors.length], life: 0, max: 160 + Math.random() * 80, shape: Math.random() < .25 ? "c" : "r",
-      });
-    }
-    if (!raf) loop();
-  }
-  // 紙ふぶきを secs 秒ふらせる
-  function rain(colors, secs = 4) {
-    const end = Date.now() + secs * 1000;
-    (function drop() {
-      for (let i = 0; i < 6; i++) parts.push({
-        x: Math.random() * innerWidth, y: -20, vx: (Math.random() - .5) * 2, vy: 2 + Math.random() * 3,
-        w: 6 + Math.random() * 5, h: 8 + Math.random() * 8, r: Math.random() * 6, vr: (Math.random() - .5) * .2,
-        c: colors[Math.floor(Math.random() * colors.length)], life: 0, max: 400, shape: Math.random() < .25 ? "c" : "r",
-      });
-      if (!raf) loop();
-      if (Date.now() < end && stage.classList.contains("show")) setTimeout(drop, 60);
-    })();
-  }
-  // 紙ふぶきを1こま進めて描く（残りがあれば続ける）
-  function loop() {
-    clearAll();
-    parts = parts.filter(p => p.life < p.max && p.y < cv.clientHeight + 40);
-    for (const p of parts) {
-      p.life++; p.vy += .18; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += p.vr;
-      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c;
-      ctx.globalAlpha = Math.min(1, (p.max - p.life) / 40);
-      if (p.shape === "c") { ctx.beginPath(); ctx.arc(0, 0, p.w / 2, 0, Math.PI * 2); ctx.fill(); }
-      else ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.r)));
-      ctx.restore();
-    }
-    raf = parts.length ? requestAnimationFrame(loop) : null;
-    if (!raf) clearAll();
-  }
+  const sound = window.RevealSound.create(soundOn);
+  const { tone, heartbeat, fanfare } = sound;
+  const confetti = window.RevealConfetti.create($("confetti"), () => stage.classList.contains("show"));
+  const { burst, rain } = confetti;
 
   /* ============ 演出シーケンス ============ */
   const stage = $("stage"), gift = $("gift");
@@ -543,7 +459,7 @@
 
   $("startBtn").onclick = async () => {
     if ($("startBtn").disabled) return;
-    if (soundOn()) audio().resume?.(); // iOS 対策: ユーザー操作で解禁
+    sound.unlock(); // iOS 対策: ユーザー操作で解禁
     if (P.secret) {
       if (needsPass) { openPass(); return; }
       try { await decryptSecret(); } catch (e) { LineShareUI.ask({ title: "発表を開けませんでした", text: "リンクが途中で切れていないか、見てみてね。", ok: "閉じる", cancel: null }); return; }
@@ -579,13 +495,13 @@
     stage.style.background = "";
     document.body.classList.remove("revealed");
     root.style.removeProperty("--reveal"); root.style.removeProperty("--reveal-deep");
-    parts = [];
+    confetti.reset();
     scrollTo({ top: 0, behavior: "smooth" });
   }
   $("replayBtn").onclick = closeStage;
   $("stageClose").onclick = closeStage;
   // もう一度見る → プレゼントからやり直し(誰かに見せるとき用)
-  $("againBtn").onclick = () => { parts = []; stage.style.background = ""; resetStage(); };
+  $("againBtn").onclick = () => { confetti.reset(); stage.style.background = ""; resetStage(); };
 
   // おくるカード（お知らせカード）にカード内容を渡して共有。create.html と同じ中立的なカード
   const NEUTRAL_COLOR = "#9b7fd1";
