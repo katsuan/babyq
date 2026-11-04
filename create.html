@@ -59,12 +59,12 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   /* iPhone・LINE の中のブラウザで、キーボードが出て画面がずれたとき、ページの外（黒）が見えないよう、ページそのものにも背景の色 */
   html { background-color: var(--bg-bottom); }
-  body { font-family: var(--font); font-size: 17px; line-height: 1.6; color: var(--ink); background: var(--bg-bottom); min-height: 100vh; }
+  body { font-family: var(--font); font-size: 17px; line-height: 1.6; color: var(--ink); background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom)); min-height: 100vh; }
   .wrap { max-width: var(--max-w); margin: 0 auto; padding: 24px 16px 48px; display: flex; flex-direction: column; gap: 16px; }
-  /* 見出しの行（Q キットの ls-brand）は、名前が長いので少し小さく。ひとことはうすい字（ツールの色は「発表ページを作る」だけに使う） */
+  /* 見出しの行（Q キットの ls-brand）は、名前が長いので少し小さく。ひとことはロゴのうす紫 */
   .ls-brand-name { font-size: 18px; }
   .ls-brand-icon { width: 28px; height: 28px; }
-  .ls-brand-copy { margin: 0 0 4px; color: var(--ink-soft); font-size: 13px; letter-spacing: 0.02em; }
+  .ls-brand-copy { margin: 0 0 4px; color: var(--ls-accent); font-size: 13px; letter-spacing: 0.02em; }
   .ls-panel { gap: 16px; padding: 24px 16px; }
   /* ラベルと入力は、年配の方にも読みやすいよう Q キットより大きめ */
   .ls-label { font-size: 16px; color: var(--ink); }
@@ -95,7 +95,7 @@
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .btn {
     border: none; border-radius: 99px; padding: 18px 16px; font-family: inherit; font-size: 18px; font-weight: 800; color: #fff; cursor: pointer;
-    background: var(--ls-accent);
+    background: linear-gradient(90deg, var(--boy), var(--girl)); box-shadow: 0 8px 20px rgba(200, 120, 180, .3);
   }
   .ls-button { min-height: 48px; font-size: 16px; }
   .out { display: none; }
@@ -103,8 +103,7 @@
   .url { font-size: 13px; word-break: break-all; background: #fff; border: 1px dashed var(--line); border-radius: var(--radius-md); padding: 16px; color: var(--ink-soft); }
   #exampleCopy { width: 100%; }
   .note { font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
-  /* 「必須」は札にせず、「なくてもOK」と同じ小さな字に（太さで分ける） */
-  .req { margin-left: 4px; font-size: 13px; font-weight: 800; color: var(--ink-soft); white-space: nowrap; }
+  .req { font-size: 12px; font-weight: 700; color: #fff; background: var(--girl-deep); border-radius: 99px; padding: 2px 8px; margin-left: 6px; vertical-align: 1px; }
   .err-msg { display: none; font-size: 15px; color: var(--girl-deep); margin-top: 8px; font-weight: 700; }
   .field.err .err-msg { display: block; }
   .field.err input[type=date] { border-color: var(--girl-deep); background: #fff5f8; }
