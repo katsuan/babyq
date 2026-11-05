@@ -35,7 +35,7 @@
 - バイナリ構成の詳細は `create.js` の `buildTokenV3` と `js/link.js` の `readV3` のコメントを参照
 - URL の中身は `js/link.js` で、決まった項目・形・長さにそろえてから使う（色は色の形だけ）。名前などが入ったページは検索に出さない
 - 発表のページのカレンダーは `js/calendar.js`（その月のマスと曜日の並び）。はじめは月曜はじまり。Q ツール共通の週のはじまり（おくるんの `shared/week-start.js`）にそろえ、カレンダーの下のボタンで日曜はじまりにも切りかえられる（前に BabyQ で選んだ値はそのまま）
-- テスト：`node --test test/`（作る画面の v3 の作り方で作ったリンクを読む・壊れた中身でも落ちない）
+- テストは、公開しない別の所に置いています（公開の前に GitHub Actions が読んで動かします）
 
 ## クエリパラメータ
 
@@ -86,4 +86,4 @@ index.html?gender=girl&due=2027-02-14&dad=太郎&mom=花子&name=べびちゃん
 | `js/confetti.js` | 発表の紙ふぶき（キャンバス） |
 | `manifest.webmanifest`・`sw.js` | ホーム画面に置くときの設定と、電波がないときに開く仕組み |
 | `params.js`・`calendar.js` | 前の名前のファイル。前の index.html を覚えているブラウザのために、新しいファイルを読むだけ（calendar.js は js/sound.js・js/confetti.js も）。2026-11-25 ごろ消す |
-| `test/` | `node --test test/`（リンクを読む・作る、カレンダー、発表の音、ファイルを読む順番、読みこみの印 `?v=` のそろい） |
+| テスト | テストは、公開しない別の所に置いています（公開の前に GitHub Actions が読んで動かします） |
