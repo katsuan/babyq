@@ -604,27 +604,8 @@
     fit(`${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()} ・ ベビーの性別発表`, H - 60, 26, { weight: 700, fill: soft });
 
     const blob = await new Promise((r) => canvas.toBlob(r, "image/png"));
-    const url = URL.createObjectURL(blob);
-    const file = new File([blob], "gender-reveal.png", { type: "image/png" });
-    const sheet = document.createElement("div");
-    sheet.className = "snap-sheet";
-    sheet.innerHTML = `<div class="snap-card" role="dialog" aria-modal="true" aria-label="画像で保存"><img alt="発表の画像"><p>画像を長押しすると保存できます。</p><div class="snap-actions"></div><button class="pill" type="button">閉じる</button></div>`;
-    sheet.querySelector("img").src = url;
-    const actions = sheet.querySelector(".snap-actions");
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      const share = Object.assign(document.createElement("button"), { type: "button", className: "pill primary" });
-      share.innerHTML = `<span class="ls-icon" data-icon="share" aria-hidden="true"></span>共有・保存`; // qcheck-ok: W1 決まった言葉だけ
-      share.onclick = () => navigator.share({ files: [file] }).catch(() => {});
-      actions.append(share);
-    }
-    const download = Object.assign(document.createElement("a"), { className: "pill", href: url, download: file.name });
-    download.innerHTML = `<span class="ls-icon" data-icon="save" aria-hidden="true"></span>ダウンロード`; // qcheck-ok: W1 決まった言葉だけ
-    actions.append(download);
-    // 画像の窓を閉じて、画像の URL を片づける
-    const close = () => { sheet.remove(); URL.revokeObjectURL(url); };
-    sheet.querySelector(".snap-card > button").onclick = close;
-    sheet.addEventListener("click", (e) => { if (e.target === sheet) close(); });
-    document.body.append(sheet);
+    // 保存の窓は Q キットのもの（長押しで保存・共有・ダウンロード）
+    LineShareUI.imageSheet(blob, { name: "gender-reveal.png", alt: "発表の画像" });
   };
 
   $("shareBtn").onclick = () => LineShareUI.copy(SHARE_URL, { button: $("shareBtn") });

@@ -380,12 +380,6 @@
     *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   }
   /* 画像で保存：発表の結果を画像に描いて出し、長押しで保存してもらう */
-  .snap-sheet { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 16px; background: rgba(20, 16, 40, .55); }
-  .snap-card { display: grid; gap: 10px; width: min(100%, 420px); max-height: 100%; overflow: auto; padding: 16px; border-radius: var(--radius-lg); background: #fff; text-align: center; }
-  .snap-card img { width: 100%; height: auto; border-radius: var(--radius-md); box-shadow: 0 4px 16px rgba(0,0,0,.12); -webkit-touch-callout: default; }
-  .snap-card p { font-size: 15px; color: var(--ink-soft); }
-  .snap-actions { display: grid; gap: 8px; }
-  .snap-actions .pill { text-decoration: none; text-align: center; }
 </style>
 </head>
 <body>
