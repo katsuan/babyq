@@ -19,23 +19,12 @@
   // URL の中身を読む部分は params.js（RevealParams）
   const R = window.RevealParams;
 
-  /* ============ URLの見た目を短くする ============
-   * 開いた直後にアドレスバーから ?p=... や #... を消す(見た目のため)。
-   * 中身は sessionStorage に置き、同じタブで再読み込みしても表示できるようにする。
-   * 共有ボタン類は消す前の元のURL(SHARE_URL)を使う。
+  /* ============ 開いた URL の中身 ============
+   * ?p=... や #... はアドレスバーに残したままにする（読みこみなおしても、そのまま見られる）。
+   * 共有ボタン類は、開いた URL（SHARE_URL）をそのまま使う。
    */
-  const STORE_KEY = "gender-reveal:search";
-  let SEARCH = R.pickSearch(location.search, location.hash); // v3 は # 側に入っている（# があれば先に読む）
-  try {
-    if (SEARCH) sessionStorage.setItem(STORE_KEY, SEARCH);
-    else SEARCH = sessionStorage.getItem(STORE_KEY) || "";
-  } catch (_) { /* 保存できない環境ではURLを消さない */ }
+  const SEARCH = R.pickSearch(location.search, location.hash); // v3 は # 側に入っている（# があれば先に読む）
   const SHARE_URL = location.origin + location.pathname + SEARCH;
-  try {
-    if (SEARCH && (location.search || location.hash) && sessionStorage.getItem(STORE_KEY) === SEARCH) {
-      history.replaceState(null, "", location.pathname);
-    }
-  } catch (_) {}
   // 開いたままのタブで別の #リンク を開くと再読み込みされず前の中身のままになるので、読み直す
   addEventListener("hashchange", () => { if (location.hash) location.reload(); });
 
