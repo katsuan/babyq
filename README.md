@@ -2,9 +2,9 @@
 
 英字は BabyQ（Baby＋Q。Q は「クイズ（Question）」：男の子？女の子？）。おくるん＝OQRN・キロっく＝kiloQ と同じく Q を絵にしたロゴを使う。
 
-アイコン（`icon.svg`・`icon-32.png`・`apple-touch-icon.png`・`icon-512.png`・`icon-maskable-512.png`）・横長のロゴ（`logo.svg`）・作成ページを共有したときの画像（`ogp-create.png`）は `python3 tools/icon.py` で作る（図形を描く部分は、となりのおくるん（`~/GitHub/q-oqrn`。GitHub のリポジトリ名は line-share）の `tools/brandkit.py`）。男の子の青 → 女の子のピンクのグラデーションに、白い輪の中の赤ちゃんの顔と右下のしっぽで Q。受け取る人の発表ページ（index.html）の共有画像は、性別をヒミツにしたプレゼントの絵（`ogp.png`）のまま。名前とロゴは作成ページにだけ出す。ホーム画面に追加したとき用に `manifest.webmanifest`。
+アイコン（`icon.svg`・`icon-32.png`・`apple-touch-icon.png`・`icon-512.png`・`icon-maskable-512.png`）・横長のロゴ（`logo.svg`）・作成ページを共有したときの画像（`ogp-create.png`）は `python3 tools/icon.py` で作る（図形を描く部分は、となりのおくるん（`~/GitHub/q-oqrn`。GitHub のリポジトリ名は oqrn）の `tools/brandkit.py`）。男の子の青 → 女の子のピンクのグラデーションに、白い輪の中の赤ちゃんの顔と右下のしっぽで Q。受け取る人の発表ページ（index.html）の共有画像は、性別をヒミツにしたプレゼントの絵（`ogp.png`）のまま。名前とロゴは作成ページにだけ出す。ホーム画面に追加したとき用に `manifest.webmanifest`。
 
-おくるんのトップの「ほかのツール」（line-share の `data/hub-links.json`）には「ジェンダーリビール 〜BabyQ〜」として、このアイコン付きで載せている。
+おくるんのトップの「ほかのツール」（oqrn の `data/hub-links.json`）には「ジェンダーリビール 〜BabyQ〜」として、このアイコン付きで載せている。
 
 
 ジェンダーリビール(性別発表)用の静的サイト。GitHub Pages でそのまま動きます。
@@ -17,7 +17,7 @@
 - 発表後の画面の「📷 画像で保存」で、結果（性別・名前・メッセージ・予定日までの日数）を 1080×1350 の画像にして保存できる（長押し・共有メニュー・ダウンロード）
 
 
-作成ページ（`create.html`）の部品（見出しの行・カード・入力欄・小さいボタン・開閉）は、おくるんの Q キット（`https://katsuan.github.io/line-share/shared/ui.css`。使い方はおくるんの README）。色はロゴのうす紫（`:root` の `--ls-accent` など）。男の子の青 → 女の子のピンクのグラデーション（大きな「作る」ボタン・性別の選び方・見出し）はジェンダーリビールにしかない見た目なので、そのまま。受け取る人の発表ページ（`index.html`）は、プレゼントの演出そのものなので Q キットを使わない。
+作成ページ（`create.html`）の部品（見出しの行・カード・入力欄・小さいボタン・開閉）は、おくるんの Q キット（`https://katsuan.github.io/oqrn/shared/ui.css`。使い方はおくるんの README）。色はロゴのうす紫（`:root` の `--ls-accent` など）。男の子の青 → 女の子のピンクのグラデーション（大きな「作る」ボタン・性別の選び方・見出し）はジェンダーリビールにしかない見た目なので、そのまま。受け取る人の発表ページ（`index.html`）は、プレゼントの演出そのものなので Q キットを使わない。
 ## 使い方
 
 `create.html` をひらいてフォームに入力 → シェア用URLを作成。
@@ -68,7 +68,7 @@ index.html?gender=girl&due=2027-02-14&dad=太郎&mom=花子&name=べびちゃん
 
 ## 紹介の窓口
 
-「ジェンダーリビールを紹介する」（おくるんのマーク）（作成ページのいちばん下）は、おくるんの `shared/tool-share.js`（`data-tool="babyq"`）。押すとおくるんで紫の紹介カードを作って LINE に送れる（リンクのシェアも選べる）。中身は line-share の `data/hub-links.json` の `key: "babyq"`。
+「ジェンダーリビールを紹介する」（おくるんのマーク）（作成ページのいちばん下）は、おくるんの `shared/tool-share.js`（`data-tool="babyq"`）。押すとおくるんで紫の紹介カードを作って LINE に送れる（リンクのシェアも選べる）。中身は oqrn の `data/hub-links.json` の `key: "babyq"`。
 
 ## すくすく（SuQSuQ）へ
 

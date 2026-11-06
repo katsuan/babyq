@@ -220,7 +220,7 @@
     isAhead(due) && { label: "予定日", dot: "due", date: due },
   ].filter(Boolean).sort((a, b) => a.date - b.date);
 
-  // 週のはじまり：1＝月曜（既定）・0＝日曜。Q ツール共通の設定（line-share/shared/week-start.js の qlove:weekStart）を先に見る。
+  // 週のはじまり：1＝月曜（既定）・0＝日曜。Q ツール共通の設定（oqrn/shared/week-start.js の qlove:weekStart）を先に見る。
   // まだないときは、前に BabyQ で選んだ値（babyq:weekStart）。共通の部品が読めないときも、BabyQ の値で動く
   const WEEK_KEY = "babyq:weekStart";
   let weekStart = 1;
